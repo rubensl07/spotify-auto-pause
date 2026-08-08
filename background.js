@@ -2,7 +2,7 @@ const spotifyUrls = [
     "open.spotify.com"
 ];
 
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     const audibleChange = ("audible" in changeInfo)
     if (!audibleChange) return
 
@@ -10,35 +10,23 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 
     const isSpotify = spotifyUrls.some(url => urlTab?.includes(url));
     if(isSpotify) return;
-    
+
     const activeAudio = changeInfo.audible;
-    if(!activeAudio) {
-        playSpotify();
-    } else {
-        pauseSpotify();
+    const spotifyTab = await locateSpotifyTab();
+
+    if (!spotifyTab)
+        return;
+
+    let isTabPlaying = activeAudio;
+    let isSpotifyPlaying = spotifyTab.audible;
+
+    if (isTabPlaying === isSpotifyPlaying) {
+        switchSpotifyMusicState(spotifyTab.id);
     }
 })
 
-async function pauseSpotify(){
-    const spotifyTab = await locateSpotifyTab();
-
-    if (!spotifyTab)
-        return;
-
-    const tabId = spotifyTab.id;
-
-    chrome.tabs.sendMessage(tabId, "pause", {});
-}
-
-async function playSpotify(){
-    const spotifyTab = await locateSpotifyTab();
-
-    if (!spotifyTab)
-        return;
-
-    const tabId = spotifyTab.id;
-
-    chrome.tabs.sendMessage(tabId, "play", {});
+async function switchSpotifyMusicState(tabId) {
+    chrome.tabs.sendMessage(tabId, "", {});
 }
 
 async function locateSpotifyTab() {
