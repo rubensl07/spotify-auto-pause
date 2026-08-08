@@ -1,3 +1,7 @@
+const spotifyUrls = [
+    "open.spotify.com"
+];
+
 let isExtensionEnabled = true;
 
 const spotifyStatus = document.querySelector("#spotify-status");
@@ -49,4 +53,22 @@ autoPauseToggle.addEventListener("change", async () => {
     updateExtensionStatus();
 });
 
+async function getMediaStatus() {
+    const tabs = await chrome.tabs.query({ audible: true });
+    const spotifyTabs = tabs.filter(item => item.url.includes('open.spotify.com'));
+    const mediaTabs = tabs.filter(item => !item.url?.includes('open.spotify.com'));
+    const tabsObject = {
+        spotify: spotifyTabs[0]?.title,
+        media: mediaTabs[0]?.title
+    }
+    return tabsObject;
+}
+
+async function loadMediaContent() {
+    const mediaContent = await getMediaStatus();
+    mediaStatus.textContent = mediaContent.media ?? "-";
+    spotifyStatus.textContent = mediaContent.spotify ?? "-";
+}
+
 loadExtensionStatus();
+loadMediaContent();

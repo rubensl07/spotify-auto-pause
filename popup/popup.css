@@ -92,10 +92,26 @@ padding: 4px 0;
 }
 
 .info-item {
-display: flex;
-justify-content: space-between;
-padding: 10px 2px;
-border-bottom: 1px solid #292929;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 2px;
+    border-bottom: 1px solid #292929;
+    min-width: 0;
+}
+
+.info-item .label {
+    flex-shrink: 0;
+}
+
+.info-item .value {
+    min-width: 0;
+    max-width: 70%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right;
 }
 
 .label {
