@@ -17,6 +17,9 @@
       "js": ["content.js"]
     }
   ],
+  "action": {
+    "default_popup": "./popup/popup.html"
+  },
   "incognito": "spanning",
   "permissions": [
     "tabs"

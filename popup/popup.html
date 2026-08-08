@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Spotify Auto Pause</title>
+
+<link rel="stylesheet" href="popup.css">
+
+</head>
+
+<body>
+    <main class="popup">
+        <header class="header">
+            <img
+                class="logo"
+                src="/assets/logo.png"
+                alt="Spotify Auto Pause logo"
+            >
+        <div>
+            <h1>Spotify Auto Pause</h1>
+            <span class="version">v2.0.0</span>
+        </div>
+    </header>
+
+    <section class="status">
+        <span class="status-indicator"></span>
+
+        <div>
+            <strong>Extension active</strong>
+            <p>Monitoring media playback</p>
+        </div>
+    </section>
+
+    <section class="setting"> 
+        <div> 
+            <strong>Auto Pause</strong> 
+            <p>Pause Spotify when other media starts playing.</p> 
+        </div> 
+        <label class="switch"> 
+            <input type="checkbox" id="autopause-toggle" checked> 
+            <span class="slider"></span> 
+        </label> 
+    </section>
+    
+    <section class="info">
+        <div class="info-item">
+            <span class="label">Spotify</span>
+            <span id="spotify-status" class="value">Checking...</span>
+        </div>
+
+        <div class="info-item">
+            <span class="label">Other media</span>
+            <span id="media-status" class="value">Checking...</span>
+        </div>
+    </section>
+
+    <footer>
+        <span>Spotify Auto Pause</span>
+    </footer>
+</main>
+
+<script src="popup.js"></script>
+
+</body>
+</html>

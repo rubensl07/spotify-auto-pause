@@ -1,0 +1,204 @@
+* {
+  box-sizing: border-box;
+  }
+
+body {
+margin: 0;
+width: 320px;
+font-family: Arial, sans-serif;
+background: #181818;
+color: #ffffff;
+}
+
+.popup {
+padding: 20px;
+}
+
+.header {
+display: flex;
+align-items: center;
+gap: 12px;
+margin-bottom: 20px;
+}
+
+.logo {
+width: 42px;
+height: 42px;
+border-radius: 8px;
+}
+
+.header h1 {
+margin: 0;
+font-size: 16px;
+}
+
+.version {
+display: block;
+margin-top: 3px;
+font-size: 11px;
+color: #999999;
+}
+
+.status {
+display: flex;
+align-items: center;
+gap: 12px;
+padding: 14px;
+border-radius: 8px;
+background: #222222;
+margin-bottom: 14px;
+}
+
+.status-indicator {
+width: 10px;
+height: 10px;
+border-radius: 50%;
+background: #1db954;
+}
+
+.status strong {
+display: block;
+font-size: 13px;
+}
+
+.status p {
+margin: 3px 0 0;
+font-size: 11px;
+color: #999999;
+}
+
+.info {
+padding: 4px 0;
+}
+
+.info-item {
+display: flex;
+justify-content: space-between;
+padding: 10px 2px;
+border-bottom: 1px solid #292929;
+}
+
+.label {
+font-size: 12px;
+color: #aaaaaa;
+}
+
+.value {
+font-size: 12px;
+}
+
+
+.switch {
+    position: relative;
+    flex-shrink: 0;
+
+    width: 42px;
+    height: 24px;
+
+    cursor: pointer;
+}
+
+.switch input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+/* Fundo do switch */
+.slider {
+    position: absolute;
+    inset: 0;
+
+    background: #3a3a3a;
+    border-radius: 24px;
+
+    transition:
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+/* Bolinha */
+.slider::before {
+    content: "";
+
+    position: absolute;
+
+    width: 18px;
+    height: 18px;
+
+    left: 3px;
+    top: 3px;
+
+    background: #ffffff;
+    border-radius: 50%;
+
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease;
+}
+
+.setting {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    padding: 14px;
+    margin-bottom: 14px;
+
+    background: #222222;
+    border-radius: 8px;
+}
+
+.setting strong {
+    display: block;
+    font-size: 13px;
+}
+
+.setting p {
+    margin: 4px 0 0;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #999999;
+}
+
+
+/* Estado selecionado */
+.switch input:checked + .slider {
+    background: #1db954;
+}
+
+/* Move a bolinha */
+.switch input:checked + .slider::before {
+    transform: translateX(18px);
+}
+
+/* Hover */
+.switch:hover .slider {
+    background: #4a4a4a;
+}
+
+.switch:hover input:checked + .slider {
+    background: #1ed760;
+}
+
+/* Foco pelo teclado */
+.switch input:focus-visible + .slider {
+    outline: 2px solid #1db954;
+    outline-offset: 3px;
+}
+
+/* Animação ao clicar */
+.switch:active .slider::before {
+    width: 20px;
+}
+
+footer {
+margin-top: 18px;
+text-align: center;
+font-size: 10px;
+color: #666666;
+}
