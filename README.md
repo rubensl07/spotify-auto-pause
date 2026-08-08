@@ -1,55 +1,81 @@
 # Spotify Auto Pause
 
-A browser extension that automatically pauses **Spotify Web** when media starts playing in another browser tab, and resumes Spotify when that media stops.
+A browser extension that automatically manages **Spotify Web** playback based on media activity in other browser tabs.
 
-> **Current version: V1**
+> **Current version: V2**
 
 ## 🎯 About
 
 Spotify Web does not automatically pause when another browser tab starts playing media.
 
-This extension was created to solve that problem by monitoring the audio state of browser tabs and communicating with the Spotify Web tab to control its playback.
+This extension solves that problem by monitoring the audio state of browser tabs and synchronizing Spotify's playback state accordingly.
 
-The project was also created as a learning exercise in developing browser extensions with **Manifest V3**, including communication between background service workers and content scripts.
+The project was also created as a learning exercise in developing browser extensions with **Manifest V3**, including service workers, content scripts, the Chrome Tabs API, and communication between extension components.
 
-## ⚙️ How V1 works
+## ⚙️ How V2 works
 
-The current version uses two main components:
+V2 uses the browser's audio state information to determine what Spotify should be doing instead of sending separate `play` and `pause` commands from the background service worker.
 
-* **Background service worker** — monitors browser tabs and detects changes in their audio state.
-* **Content script** — runs on Spotify Web and controls the Spotify playback button.
+The main components are:
+
+* **Background service worker** — monitors changes in the audio state of browser tabs and determines the appropriate Spotify playback state.
+* **Content script** — runs on Spotify Web and interacts with the Spotify playback controls.
 
 The basic flow is:
 
 ```text
-Other browser tab starts playing audio
+Other browser tab changes audio state
               ↓
        background.js
               ↓
-    Finds Spotify Web tab
+    Checks tab audio state
               ↓
-       Sends "pause"
+       Finds Spotify tab
+              ↓
+    Determines desired state
               ↓
          content.js
               ↓
-    Finds Spotify's Pause button
+    Checks Spotify playback state
               ↓
-           Pauses
+      Pauses / resumes / does nothing
 ```
 
-When the other tab stops playing media, the reverse process is used to resume Spotify.
+Instead of treating `play` and `pause` as independent commands, V2 uses the current state of the browser and Spotify to decide whether an action is actually necessary.
+
+## 🧠 V2 Architecture
+
+One of the main changes from V1 to V2 is the way playback commands are handled.
+
+### V1
+
+The background service worker explicitly sent separate commands:
+
+```text
+"pause"
+"play"
+```
+
+The content script then executed the corresponding action.
+
+### V2
+
+The background service worker determines the desired state based on the information provided by the browser, particularly:
+
+* `changeInfo.audible`
+* the current Spotify tab's `audible` state
+
+The content script is responsible for applying the required state to Spotify rather than simply receiving an arbitrary play/pause command.
+
+This makes the communication more state-oriented and reduces unnecessary playback actions.
 
 ## 🧩 Current limitations
 
-V1 is a functional prototype and has some known limitations.
-
 * Audio state detection relies on the browser's `audible` property.
-* Detection of audio stopping may have a small delay.
+* Changes to the browser's audio state may not be detected immediately, particularly when media stops playing.
 * Spotify's interface and accessibility labels may change, potentially requiring updates to the content script.
 * The extension currently targets Spotify Web.
-* V1 uses separate `play` and `pause` messages between the background service worker and content script.
-
-These limitations are intentional for the current version and will be addressed as the project evolves.
+* The extension depends on the Spotify Web interface to control playback.
 
 ## 🛠️ Technologies
 
@@ -82,22 +108,20 @@ This project is currently intended to be loaded as an unpacked browser extension
 3. Enable **Developer mode**.
 4. Select **Load unpacked**.
 5. Select the project directory.
-6. Open Spotify Web and start playing music.
+6. Open Spotify Web.
 7. Play media in another browser tab to test the extension.
 
 ## 🔖 Versioning
 
 The project uses **Git tags** to identify stable versions.
 
-The current implementation is **V1**.
+Current release:
 
-Future versions may introduce significant architectural changes rather than simply extending the existing implementation.
+```text
+v2.0.0
+```
 
-## 🔮 Future development
-
-V2 is planned to substantially change the way playback state is handled.
-
-The planned architecture will reduce the dependency on separate `play` and `pause` messages between the background service worker and content script. Instead, the background will use information from `changeInfo` and the current Spotify tab's audio state to determine whether Spotify should be paused, resumed, or left unchanged.
+The V2 release represents a significant architectural change from V1 rather than a simple incremental update.
 
 ## 📄 License
 
