@@ -11,22 +11,29 @@ chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     const isSpotify = spotifyUrls.some(url => urlTab?.includes(url));
     if(isSpotify) return;
 
-    const activeAudio = changeInfo.audible;
+    const activeAudioInCurrentTab = changeInfo.audible;
     const spotifyTab = await locateSpotifyTab();
 
     if (!spotifyTab)
         return;
 
-    let isTabPlaying = activeAudio;
+    const activeAudioInOtherTabs = await verifyAudioInOtherTabs(tabId);
+
+    let isMediaPlaying = activeAudioInCurrentTab || activeAudioInOtherTabs;
     let isSpotifyPlaying = spotifyTab.audible;
 
-    if (isTabPlaying === isSpotifyPlaying) {
+    if (isMediaPlaying === isSpotifyPlaying) {
         switchSpotifyMusicState(spotifyTab.id);
     }
 })
 
 async function switchSpotifyMusicState(tabId) {
     chrome.tabs.sendMessage(tabId, "", {});
+}
+
+async function verifyAudioInOtherTabs(currentTabId) {
+    const tabs = await chrome.tabs.query({ audible: true });
+    return tabs.some(tab => tab.id !== currentTabId);
 }
 
 async function locateSpotifyTab() {
