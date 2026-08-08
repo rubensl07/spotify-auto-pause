@@ -22,6 +22,7 @@
   },
   "incognito": "spanning",
   "permissions": [
-    "tabs"
+    "tabs",
+    "storage"
   ]
 }

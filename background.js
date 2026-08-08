@@ -3,6 +3,9 @@ const spotifyUrls = [
 ];
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+    const isExtensionActive = await getExtensionActiveStatus()
+    if (!isExtensionActive) return;
+
     const audibleChange = ("audible" in changeInfo)
     if (!audibleChange) return
 
@@ -45,4 +48,9 @@ async function locateSpotifyTab() {
     if (spotifyTabs.length > 0)
         return spotifyTabs[0];
     return null
+}
+
+async function getExtensionActiveStatus(){
+    const result = await chrome.storage.local.get(["autopauseEnabled"]);
+    return result.autopauseEnabled ?? true;
 }

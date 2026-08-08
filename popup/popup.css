@@ -47,6 +47,20 @@ padding: 14px;
 border-radius: 8px;
 background: #222222;
 margin-bottom: 14px;
+
+transition: background 0.2s ease;
+}
+
+.status.inactive {
+    background: #1e1e1e;
+}
+
+.status.inactive strong {
+    color: #999999;
+}
+
+.status.inactive p {
+    color: #666666;
 }
 
 .status-indicator {
@@ -54,6 +68,12 @@ width: 10px;
 height: 10px;
 border-radius: 50%;
 background: #1db954;
+  
+transition: background 0.2s ease;
+}
+
+.status-indicator.inactive {
+    background: #666666;
 }
 
 .status strong {
