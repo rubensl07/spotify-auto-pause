@@ -1,4 +1,5 @@
 loadMessagesText();
+loadVersion();
 
 let isExtensionEnabled = true;
 
@@ -75,6 +76,12 @@ document.querySelector("#spotify-label").textContent = "Spotify";
 document.querySelector("#media-label").textContent = chrome.i18n.getMessage("otherMediaLabel");
 document.querySelector("#spotify-status").textContent = chrome.i18n.getMessage("-");
 document.querySelector("#media-status").textContent = chrome.i18n.getMessage("-");
+}
+
+function loadVersion() {
+    const manifest = chrome.runtime.getManifest();
+    const versionElement = document.querySelector("#extension-version");
+    versionElement.textContent = `v${manifest.version}`;
 }
 
 loadExtensionStatus();
