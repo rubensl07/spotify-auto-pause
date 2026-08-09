@@ -7,7 +7,6 @@
     "48": "assets/logo.png",
     "128": "assets/logo.png"
   },
-  "minimum_chrome_version": "45",
   "background": {
       "service_worker": "background.js"
   },

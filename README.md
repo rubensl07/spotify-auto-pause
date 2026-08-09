@@ -86,10 +86,6 @@ This makes the communication more state-oriented and reduces unnecessary playbac
 * Service Workers
 * Chrome Tabs API
 
-## 🌐 Browser compatibility
-
-The extension requires Chrome 45 or later because Chrome 45 introduced support for the `tabs.Tab.audible` property used to detect whether a tab is producing audio.
-
 ## 📁 Project structure
 
 ```text
