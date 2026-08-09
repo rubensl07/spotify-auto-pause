@@ -1,6 +1,4 @@
-const spotifyUrls = [
-    "open.spotify.com"
-];
+importScripts("config.js");
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     const isExtensionActive = await getExtensionActiveStatus()
@@ -41,8 +39,9 @@ async function verifyAudioInOtherTabs(currentTabId) {
 
 async function locateSpotifyTab() {
     const tabs = await chrome.tabs.query({});
+
     const spotifyTabs = tabs.filter(item =>
-    item.url.includes('open.spotify.com')
+        spotifyUrls.some(url => item.url.includes(url))
     );
 
     if (spotifyTabs.length > 0)
