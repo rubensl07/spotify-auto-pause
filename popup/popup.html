@@ -29,15 +29,15 @@
         <span class="status-indicator" id="status-indicator"></span>
 
         <div>
-            <strong id="extension-status-title">Extension active</strong>
-            <p id="extension-status-description">Monitoring media playback</p>
+            <strong id="extension-status-title"></strong>
+            <p id="extension-status-description"></p>
         </div>
     </section>
 
     <section class="setting"> 
         <div> 
-            <strong>Auto Pause</strong> 
-            <p>Pause Spotify when other media starts playing.</p> 
+            <strong id="autopause-title"></strong> 
+            <p id="autopause-description"></p> 
         </div> 
         <label class="switch"> 
             <input type="checkbox" id="autopause-toggle"> 
@@ -47,13 +47,13 @@
     
     <section class="info">
         <div class="info-item">
-            <span class="label">Spotify</span>
-            <span id="spotify-status" class="value">Checking...</span>
+            <span id="spotify-label" class="label"></span>
+            <span id="spotify-status" class="value"></span>
         </div>
 
         <div class="info-item">
-            <span class="label">Other media</span>
-            <span id="media-status" class="value">Checking...</span>
+            <span id="media-label" class="label"></span>
+            <span id="media-status" class="value"></span>
         </div>
     </section>
 

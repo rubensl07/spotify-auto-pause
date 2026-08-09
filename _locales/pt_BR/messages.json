@@ -1,0 +1,23 @@
+{
+  "extensionActive": {
+    "message": "Extensão ativa"
+  },
+  "extensionInactive": {
+    "message": "Extensão inativa"
+  },
+  "monitoringEnabled": {
+    "message": "Monitorando reprodução de mídia"
+  },
+  "monitoringDisabled": {
+    "message": "Monitoramento de reprodução de mídia desativado"
+  },
+  "autoPause": {
+    "message": "Pausamento automático"
+  },
+  "autoPauseText": {
+    "message": "Pausa o Spotify quando outra mídia estiver sendo reproduzida."
+  },
+  "otherMediaLabel": {
+    "message": "Outras mídias"
+  }
+}

@@ -2,6 +2,8 @@ const spotifyUrls = [
     "open.spotify.com"
 ];
 
+loadMessagesText();
+
 let isExtensionEnabled = true;
 
 const spotifyStatus = document.querySelector("#spotify-status");
@@ -13,19 +15,17 @@ const statusIndicator = document.querySelector("#status-indicator");
 const extensionStatusTitle = document.querySelector("#extension-status-title");
 const extensionStatusDescription = document.querySelector("#extension-status-description");
 
-spotifyStatus.textContent = "-";
-mediaStatus.textContent = "-";
-
 function updateExtensionStatus() {
     if (isExtensionEnabled) {
-        extensionStatusTitle.textContent = "Extension active";
-        extensionStatusDescription.textContent = "Monitoring media playback";
+        extensionStatusTitle.textContent = chrome.i18n.getMessage("extensionActive");
+        extensionStatusDescription.textContent = chrome.i18n.getMessage("monitoringEnabled");
 
         statusIndicator.classList.remove("inactive");
         extensionStatus.classList.remove("inactive");
     } else {
-        extensionStatusTitle.textContent = "Extension inactive";
-        extensionStatusDescription.textContent = "Media monitoring is disabled";
+        chrome.i18n.getMessage("nomeDaMensagem");
+        extensionStatusTitle.textContent = chrome.i18n.getMessage("extensionInactive");
+        extensionStatusDescription.textContent = chrome.i18n.getMessage("monitoringDisabled");
 
         statusIndicator.classList.add("inactive");
         extensionStatus.classList.add("inactive");
@@ -70,5 +70,15 @@ async function loadMediaContent() {
     spotifyStatus.textContent = mediaContent.spotify ?? "-";
 }
 
+function loadMessagesText() {
+document.querySelector("#extension-status-title").textContent = chrome.i18n.getMessage("extensionActive");
+document.querySelector("#extension-status-description").textContent = chrome.i18n.getMessage("monitoringEnabled");
+document.querySelector("#autopause-title").textContent = chrome.i18n.getMessage("autoPause");
+document.querySelector("#autopause-description").textContent = chrome.i18n.getMessage("autoPauseText");
+document.querySelector("#spotify-label").textContent = "Spotify";
+document.querySelector("#media-label").textContent = chrome.i18n.getMessage("otherMediaLabel");
+document.querySelector("#spotify-status").textContent = chrome.i18n.getMessage("-");
+document.querySelector("#media-status").textContent = chrome.i18n.getMessage("-");
+}
 loadExtensionStatus();
 loadMediaContent();

@@ -1,5 +1,6 @@
 {
   "manifest_version": 3,
+  "default_locale": "en",
   "name": "Spotify Auto Pause",
   "version": "2.1.0",
   "description": "An extension that pauses the Spotify web page while any other content is playing on browser",
